@@ -1,0 +1,19 @@
+{
+  "id": "doom",
+  "name": "Doom",
+  "version": "0.1.0",
+  "main": "fr.euphyllia.fidorial.doom.DoomPlugin",
+  "authors": [
+    "Euphyllia",
+    "id Software (original game)"
+  ],
+  "depends": [],
+  "defaultPermission": "op",
+  "permissions": {
+    "doom.play": {
+      "description": "Play Doom with /doom",
+      "regular": "TRUE",
+      "operator": "TRUE"
+    }
+  }
+}

@@ -1,0 +1,153 @@
+// Generated from id Software's linuxdoom-1.10 sources by gen_info.py - do not edit.
+// Copyright (C) 1993-1996 by id Software, Inc. Licensed under the GNU GPL v2 or later.
+package fr.euphyllia.fidorial.doom.engine.info;
+
+
+/**
+ * Map object types ({@code mobjtype_t}).
+ */
+public final class MobjType {
+
+    public static final int MT_PLAYER = 0;
+    public static final int MT_POSSESSED = 1;
+    public static final int MT_SHOTGUY = 2;
+    public static final int MT_VILE = 3;
+    public static final int MT_FIRE = 4;
+    public static final int MT_UNDEAD = 5;
+    public static final int MT_TRACER = 6;
+    public static final int MT_SMOKE = 7;
+    public static final int MT_FATSO = 8;
+    public static final int MT_FATSHOT = 9;
+    public static final int MT_CHAINGUY = 10;
+    public static final int MT_TROOP = 11;
+    public static final int MT_SERGEANT = 12;
+    public static final int MT_SHADOWS = 13;
+    public static final int MT_HEAD = 14;
+    public static final int MT_BRUISER = 15;
+    public static final int MT_BRUISERSHOT = 16;
+    public static final int MT_KNIGHT = 17;
+    public static final int MT_SKULL = 18;
+    public static final int MT_SPIDER = 19;
+    public static final int MT_BABY = 20;
+    public static final int MT_CYBORG = 21;
+    public static final int MT_PAIN = 22;
+    public static final int MT_WOLFSS = 23;
+    public static final int MT_KEEN = 24;
+    public static final int MT_BOSSBRAIN = 25;
+    public static final int MT_BOSSSPIT = 26;
+    public static final int MT_BOSSTARGET = 27;
+    public static final int MT_SPAWNSHOT = 28;
+    public static final int MT_SPAWNFIRE = 29;
+    public static final int MT_BARREL = 30;
+    public static final int MT_TROOPSHOT = 31;
+    public static final int MT_HEADSHOT = 32;
+    public static final int MT_ROCKET = 33;
+    public static final int MT_PLASMA = 34;
+    public static final int MT_BFG = 35;
+    public static final int MT_ARACHPLAZ = 36;
+    public static final int MT_PUFF = 37;
+    public static final int MT_BLOOD = 38;
+    public static final int MT_TFOG = 39;
+    public static final int MT_IFOG = 40;
+    public static final int MT_TELEPORTMAN = 41;
+    public static final int MT_EXTRABFG = 42;
+    public static final int MT_MISC0 = 43;
+    public static final int MT_MISC1 = 44;
+    public static final int MT_MISC2 = 45;
+    public static final int MT_MISC3 = 46;
+    public static final int MT_MISC4 = 47;
+    public static final int MT_MISC5 = 48;
+    public static final int MT_MISC6 = 49;
+    public static final int MT_MISC7 = 50;
+    public static final int MT_MISC8 = 51;
+    public static final int MT_MISC9 = 52;
+    public static final int MT_MISC10 = 53;
+    public static final int MT_MISC11 = 54;
+    public static final int MT_MISC12 = 55;
+    public static final int MT_INV = 56;
+    public static final int MT_MISC13 = 57;
+    public static final int MT_INS = 58;
+    public static final int MT_MISC14 = 59;
+    public static final int MT_MISC15 = 60;
+    public static final int MT_MISC16 = 61;
+    public static final int MT_MEGA = 62;
+    public static final int MT_CLIP = 63;
+    public static final int MT_MISC17 = 64;
+    public static final int MT_MISC18 = 65;
+    public static final int MT_MISC19 = 66;
+    public static final int MT_MISC20 = 67;
+    public static final int MT_MISC21 = 68;
+    public static final int MT_MISC22 = 69;
+    public static final int MT_MISC23 = 70;
+    public static final int MT_MISC24 = 71;
+    public static final int MT_MISC25 = 72;
+    public static final int MT_CHAINGUN = 73;
+    public static final int MT_MISC26 = 74;
+    public static final int MT_MISC27 = 75;
+    public static final int MT_MISC28 = 76;
+    public static final int MT_SHOTGUN = 77;
+    public static final int MT_SUPERSHOTGUN = 78;
+    public static final int MT_MISC29 = 79;
+    public static final int MT_MISC30 = 80;
+    public static final int MT_MISC31 = 81;
+    public static final int MT_MISC32 = 82;
+    public static final int MT_MISC33 = 83;
+    public static final int MT_MISC34 = 84;
+    public static final int MT_MISC35 = 85;
+    public static final int MT_MISC36 = 86;
+    public static final int MT_MISC37 = 87;
+    public static final int MT_MISC38 = 88;
+    public static final int MT_MISC39 = 89;
+    public static final int MT_MISC40 = 90;
+    public static final int MT_MISC41 = 91;
+    public static final int MT_MISC42 = 92;
+    public static final int MT_MISC43 = 93;
+    public static final int MT_MISC44 = 94;
+    public static final int MT_MISC45 = 95;
+    public static final int MT_MISC46 = 96;
+    public static final int MT_MISC47 = 97;
+    public static final int MT_MISC48 = 98;
+    public static final int MT_MISC49 = 99;
+    public static final int MT_MISC50 = 100;
+    public static final int MT_MISC51 = 101;
+    public static final int MT_MISC52 = 102;
+    public static final int MT_MISC53 = 103;
+    public static final int MT_MISC54 = 104;
+    public static final int MT_MISC55 = 105;
+    public static final int MT_MISC56 = 106;
+    public static final int MT_MISC57 = 107;
+    public static final int MT_MISC58 = 108;
+    public static final int MT_MISC59 = 109;
+    public static final int MT_MISC60 = 110;
+    public static final int MT_MISC61 = 111;
+    public static final int MT_MISC62 = 112;
+    public static final int MT_MISC63 = 113;
+    public static final int MT_MISC64 = 114;
+    public static final int MT_MISC65 = 115;
+    public static final int MT_MISC66 = 116;
+    public static final int MT_MISC67 = 117;
+    public static final int MT_MISC68 = 118;
+    public static final int MT_MISC69 = 119;
+    public static final int MT_MISC70 = 120;
+    public static final int MT_MISC71 = 121;
+    public static final int MT_MISC72 = 122;
+    public static final int MT_MISC73 = 123;
+    public static final int MT_MISC74 = 124;
+    public static final int MT_MISC75 = 125;
+    public static final int MT_MISC76 = 126;
+    public static final int MT_MISC77 = 127;
+    public static final int MT_MISC78 = 128;
+    public static final int MT_MISC79 = 129;
+    public static final int MT_MISC80 = 130;
+    public static final int MT_MISC81 = 131;
+    public static final int MT_MISC82 = 132;
+    public static final int MT_MISC83 = 133;
+    public static final int MT_MISC84 = 134;
+    public static final int MT_MISC85 = 135;
+    public static final int MT_MISC86 = 136;
+    public static final int NUMMOBJTYPES = 137;
+
+
+    private MobjType() {
+    }
+}
