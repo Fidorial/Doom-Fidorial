@@ -241,7 +241,7 @@ public final class ShaderSource {
                 #version 330
                 #extension GL_ARB_separate_shader_objects : require
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                 #include <minecraft:fog.glsl>
                 #include <minecraft:sample_lightmap.glsl>
                 #endif
@@ -249,18 +249,18 @@ public final class ShaderSource {
                 #include <minecraft:dynamictransforms.glsl>
                 #include <minecraft:projection.glsl>
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH) && !defined(IS_GRAYSCALE)
+                #if defined(AFFECTED_BY_FOG_AND_LIGHT) && !defined(IS_GRAYSCALE)
                 #define DOOM_ENABLED
                 #endif
 
                 layout(location = 0) in vec3 Position;
                 layout(location = 1) in vec4 Color;
                 layout(location = 2) in vec2 UV0;
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                 layout(location = 3) in ivec2 UV2;
                 #endif
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                 uniform sampler2D Sampler2;
                 layout(location = 0) out float sphericalVertexDistance;
                 layout(location = 1) out float cylindricalVertexDistance;
@@ -282,7 +282,7 @@ public final class ShaderSource {
                 void main() {
                     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                     sphericalVertexDistance = fog_spherical_distance(Position);
                     cylindricalVertexDistance = fog_cylindrical_distance(Position);
                     vertexColor = Color * sample_lightmap(Sampler2, UV2);
@@ -318,20 +318,20 @@ public final class ShaderSource {
                 #version 330
                 #extension GL_ARB_separate_shader_objects : require
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                 #include <minecraft:fog.glsl>
                 #endif
 
                 #include <minecraft:dynamictransforms.glsl>
                 #include <minecraft:oit.glsl>
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH) && !defined(IS_GRAYSCALE)
+                #if defined(AFFECTED_BY_FOG_AND_LIGHT) && !defined(IS_GRAYSCALE)
                 #define DOOM_ENABLED
                 #endif
 
                 uniform sampler2D Sampler0;
 
-                #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
+                #ifdef AFFECTED_BY_FOG_AND_LIGHT
                 layout(location = 0) in float sphericalVertexDistance;
                 layout(location = 1) in float cylindricalVertexDistance;
                 #endif
@@ -353,18 +353,12 @@ public final class ShaderSource {
                 #endif
 
                 vec4 calculateFinalColor(vec4 color) {
-                    #ifdef OIT_ACCUMULATE
-                    color = sampleColorForAccumulation(color);
-                    #endif
-
-                    #if !defined(IS_SEE_THROUGH) && !defined(IS_GUI)
-
+                    #ifdef AFFECTED_BY_FOG_AND_LIGHT
                     color = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+                    #endif
 
                     #ifdef OIT_ACCUMULATE
                     color = sampleColorForAccumulation(color);
-                    #endif
-
                     #endif
 
                     return color;

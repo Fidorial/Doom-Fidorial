@@ -46,7 +46,10 @@ public final class ResourcePackBuilder {
      */
     public static final String BLANK_MODEL = NAMESPACE + ":blank";
 
-    private static final int MIN_FORMAT_MAJOR = 100;
+    /**
+     * 26.4 Pre-Release 1: the text shader is written for its {@code AFFECTED_BY_FOG_AND_LIGHT} define.
+     */
+    private static final int MIN_FORMAT_MAJOR = 104;
     private static final int MIN_FORMAT_MINOR = 0;
     /**
      * Any later format: the pack only replaces the text shader and adds sounds.

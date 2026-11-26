@@ -9,6 +9,7 @@ import fr.euphyllia.fidorial.doom.engine.ui.HuFont;
 import fr.fidorial.Server;
 import fr.fidorial.entity.player.Player;
 import fr.fidorial.entity.player.PlayerInput;
+import fr.fidorial.math.Location;
 import net.kyori.adventure.resource.ResourcePackRequest;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.jspecify.annotations.Nullable;
@@ -212,6 +213,16 @@ public final class SessionManager {
         final DoomPlayer p = players.get(uuid);
         if (p != null) {
             p.input().turn(degrees);
+        }
+    }
+
+    /**
+     * Keeps the screen around the head of a player who moved. Runs on the player's thread.
+     */
+    public void moved(final Player player, final Location to) {
+        final DoomPlayer p = players.get(player.uuid());
+        if (p != null) {
+            p.follow(player, to);
         }
     }
 

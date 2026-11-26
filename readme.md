@@ -26,8 +26,8 @@ and maps.
 
 |                  | Minimum                                                                                                                                                                                            |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Minecraft client | **Java Edition 26.4 Snapshot 4**, unmodified (no mod, no client-side plugin)                                                                                                                       |
-| Server           | **Fidorial** for Minecraft 26.4 Snapshot 4, with `fidorial-api` `26.4-snapshot-4-build.29+0.1.0` or later, which has the player events and `MapView.hang` that Doom uses                           |
+| Minecraft client | **Java Edition 26.4 Pre-Release 1**, unmodified (no mod, no client-side plugin)                                                                                                                    |
+| Server           | **Fidorial** for Minecraft 26.4 Pre-Release 1, with `fidorial-api` `26.4-pre-1-build.34+0.1.0` or later, whose registry keys (`AttributeKeys`, `ItemKeys`) Doom uses                               |
 | Java             | **25**, to run the server and to build the plugin                                                                                                                                                  |
 | Resource pack    | the pack the plugin serves must be **accepted** by each player: without it the screen and the sounds cannot be drawn. Set `pack-required=true` in `doom.properties` to kick players who decline it |
 | Network          | clients must reach the pack's HTTP port, `pack-port` (TCP 8166 by default); outside a LAN, set `pack-public-url`                                                                                   |
@@ -39,11 +39,11 @@ and maps.
 The plugin is built against `fr.fidorial:fidorial-api`, in the version given by `fidorialApiVersion` in
 `gradle.properties`. It is looked up in the local Maven repository first, then on repo.euphyllia.moe:
 
-* by default, `26.4-snapshot-4-build.+` takes the latest build published for that Minecraft version. A
-  precise version can be pinned instead, `26.4-snapshot-4-build.<n>+0.1.0`, where `<n>` restarts at 1
+* by default, `26.4-pre-1-build.+` takes the latest build published for that Minecraft version. A
+  precise version can be pinned instead, `26.4-pre-1-build.<n>+0.1.0`, where `<n>` restarts at 1
   with each Minecraft version; the GitHub pre-release of every Fidorial build gives its exact version;
 * with a clone of Fidorial, run `./gradlew :fidorial-api:publishToMavenLocal` there, then put the
-  published version (for instance `26.4-snapshot-4-local+0.1.0`) in `fidorialApiVersion`.
+  published version (for instance `26.4-pre-1-local+0.1.0`) in `fidorialApiVersion`.
 
 Java 25 is required; the Gradle wrapper downloads it when needed.
 

@@ -3,6 +3,7 @@ package fr.euphyllia.fidorial.doom;
 import fr.euphyllia.fidorial.doom.audio.MusicRenderer;
 import fr.euphyllia.fidorial.doom.audio.MusicTrack;
 import fr.euphyllia.fidorial.doom.display.DoomPalette;
+import fr.euphyllia.fidorial.doom.display.ShaderSource;
 import fr.euphyllia.fidorial.doom.engine.Wad;
 import fr.euphyllia.fidorial.doom.engine.render.RenderData;
 import fr.euphyllia.fidorial.doom.pack.PackHttpServer;
@@ -60,9 +61,10 @@ import java.util.UUID;
 public final class DoomPlugin implements Plugin {
 
     /**
-     * Bump when the pack content changes for the same WAD, to rebuild cached packs.
+     * Bump when the pack content changes for the same WAD, to rebuild cached packs. The shaders are part
+     * of the cache key already: changing them rebuilds the pack on its own.
      */
-    private static final int PACK_REVISION = 2;
+    private static final int PACK_REVISION = 3;
     private static final UUID PACK_ID = UUID.fromString("d0e5a1b2-1993-4c0d-9e11-000000000666");
     private final List<Subscription> subscriptions = new ArrayList<>();
     private @Nullable PluginContext context;
@@ -77,7 +79,7 @@ public final class DoomPlugin implements Plugin {
     private static ResourcePackBuilder.Pack pack(final DoomConfig cfg, final Path folder, final Wad wad,
                                                  final RenderData res, final DoomPalette palette,
                                                  final ComponentLogger log) throws IOException {
-        final String key = cacheKey(cfg, wad);
+        final String key = cacheKey(cfg, wad, palette);
         final Path cache = folder.resolve("cache");
         final Path zip = cache.resolve("pack-" + key + ".zip");
         final Path sounds = cache.resolve("pack-" + key + ".sounds");
@@ -109,10 +111,13 @@ public final class DoomPlugin implements Plugin {
         return pack;
     }
 
-    private static String cacheKey(final DoomConfig cfg, final Wad wad) {
+    private static String cacheKey(final DoomConfig cfg, final Wad wad, final DoomPalette palette) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(("rev" + PACK_REVISION + cfg.hideHud() + cfg.music()).getBytes(StandardCharsets.UTF_8));
+            final ShaderSource shader = new ShaderSource(palette);
+            digest.update(shader.vertexShader().getBytes(StandardCharsets.UTF_8));
+            digest.update(shader.fragmentShader().getBytes(StandardCharsets.UTF_8));
             for (int lump = 0; lump < wad.numLumps(); lump++) {
                 digest.update(wad.lumpName(lump).getBytes(StandardCharsets.US_ASCII));
                 digest.update(wad.readLump(lump));
@@ -270,6 +275,7 @@ public final class DoomPlugin implements Plugin {
                 double delta = e.to().yaw() - e.from().yaw();
                 delta = ((delta % 360.0) + 540.0) % 360.0 - 180.0;
                 m.turn(e.player().uuid(), delta);
+                m.moved(e.player(), e.to());
             }
         }));
         subscriptions.add(events.subscribe(PlayerUseItemEvent.class, e -> {
